@@ -113,7 +113,7 @@ namespace airlib_rpclib
             std::vector<std::string> controller_messages;
             bool can_arm;
 
-            MSGPACK_DEFINE_ARRAY(collision, kinematics_estimated, gps_location, timestamp, landed_state, rc_data);
+            MSGPACK_DEFINE_ARRAY(collision, kinematics_estimated, gps_location, timestamp, landed_state, rc_data, ready, ready_message, can_arm);
 
             MultirotorState()
             {

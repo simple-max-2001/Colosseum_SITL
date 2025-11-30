@@ -2,6 +2,8 @@
 
 Below is summarized list of important changes. This does not include minor/less important changes or bug fixes or documentation update. This list updated every few months. For complete detailed changes, please review [commit history](https://github.com/CodexLabsLLC/Colosseum/commits/main).
 
+### August 2025
+* First release of Colosseum 0.1 Beta, which includes some updates to be able to run with Ubuntu 24.04 and changes for running with UE 5.4+. Note that the `main` branch will always support the latest versions!!!!!
 
 ### Jan 2022
 * Latest release `v1.7.0` for [Windows](https://github.com/CodexLabsLLC/Colosseum/releases/tag/v1.7.0-windows) and [Linux](https://github.com/CodexLabsLLC/Colosseum/releases/tag/v1.7.0-linux)

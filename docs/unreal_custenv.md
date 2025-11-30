@@ -1,4 +1,4 @@
-# Creating and Setting Up Unreal Environment
+# Creating and Setting Up Unreal Environment On Windows
 This page contains the complete instructions start to finish for setting up Unreal environment with Colosseum. The Unreal Marketplace has [several environment](https://www.unrealengine.com/marketplace/content-cat/assets/environments) available that you can start using in just few minutes. It is also possible to use environments available on websites such as [turbosquid.com](https://www.turbosquid.com/) or [cgitrader.com](https://www.cgtrader.com/) with bit more effort (here's [tutorial video](https://www.youtube.com/watch?v=y09VbdQWvQY&feature)). In addition there also several [free environments](https://github.com/CodexLabsLLC/Colosseum/issues/424) available.
 
 Below we will use a freely downloadable environment from Unreal Marketplace called Landscape Mountain but the steps are same for any other environments.
@@ -8,28 +8,25 @@ There is no `Epic Games Launcher` for Linux which means that if you need to crea
 
 ## Step by Step Instructions
 
-1. Make sure Colosseum is built and Unreal 4.27 is installed as described in [build instructions](build_windows.md).
-1. In `Epic Games Launcher` click the Learn tab then scroll down and find `Landscape Mountains`. Click the `Create Project` and download this content (~2GB download).
+1. Make sure Colosseum is built and Unreal version 5.4  or greater is installed as described in [build instructions](build_windows.md).
+2. In `Epic Games Launcher`, you can download any project that you want. Once you find one, add it to your Library. Click the `Create Project` and download this content (~2GB download).
 
     ![current version](images/landscape_mountains.png)
 
-1. Open `LandscapeMountains.uproject`, it should launch the Unreal Editor.
+3. Open `YourCustomProject.uproject`, it should launch the Unreal Editor.
 
     ![unreal editor](images/unreal_editor.png)
-    
-    !!!note
 
-        The Landscape Mountains project is supported up to Unreal Engine version 4.24. If you do not have 4.24 installed, you should see a dialog titled `Select Unreal Engine Version` with a dropdown to select from installed versions. Select 4.27 or greater to migrate the project to a supported engine version. If you have 4.24 installed, you can manually migrate the project by navigating to the corresponding .uproject file in Windows Explorer, right-clicking it, and selecting the `Switch Unreal Engine version...` option. 
 
-1. From the `File menu` select `New C++ class`, leave default `None` on the type of class, click `Next`, leave default name `MyClass`, and click `Create Class`. We need to do this because Unreal requires at least one source file in project. It should trigger compile and open up Visual Studio solution `LandscapeMountains.sln`.
+4. From the `File menu` select `New C++ class`, leave default `None` on the type of class, click `Next`, leave default name `MyClass`, and click `Create Class`. We need to do this because Unreal requires at least one source file in project. It should trigger compile and open up Visual Studio solution `YourCustomProject.sln`.
 
-1. Go to your folder for Colosseum repo and copy `Unreal\Plugins` folder in to your `LandscapeMountains` folder. This way now your own Unreal project has Colosseum plugin.
+5. Go to your folder for Colosseum repo and copy `Unreal\Plugins` folder in to your `YourCustomProject` folder. This way now your own Unreal project has Colosseum plugin.
 
     !!!note
 
         If the Colosseum installation is fresh, i.e, hasn't been built before, make sure that you run `build.cmd` from the root directory once before copying `Unreal\Plugins` folder so that `AirLib` files are also included. If you have made some changes in the Blocks environment, make sure to run `update_to_git.bat` from `Unreal\Environments\BlocksV2` to update the files in `Unreal\Plugins`.
 
-1. Edit the `LandscapeMountains.uproject` so that it looks like this
+6. Edit the `YourCustomProject.uproject` so that it looks like this
 
     ```json
     {
@@ -39,11 +36,11 @@ There is no `Epic Games Launcher` for Linux which means that if you need to crea
     	"Description": "",
     	"Modules": [
     		{
-    			"Name": "LandscapeMountains",
+    			"Name": "YourCustomProject",
     			"Type": "Runtime",
     			"LoadingPhase": "Default",
     			"AdditionalDependencies": [
-    				"Colosseum"
+    				"AirSim"
     			]
     		}
     	],
@@ -53,44 +50,44 @@ There is no `Epic Games Launcher` for Linux which means that if you need to crea
     	],
     	"Plugins": [
     		{
-    			"Name": "Colosseum",
+    			"Name": "AirSim",
     			"Enabled": true
     		}
     	]
     }
     ```
     
-1. Edit the `Config\DefaultGame.ini` to add the following line at the end:
+7. Edit the `Config\DefaultGame.ini` to add the following line at the end:
 
     ```
-    +MapsToCook=(FilePath="/Colosseum/ColosseumAssets")
+    +MapsToCook=(FilePath="/AirSim/AirSimAssets")
     ```
     
     Doing this forces Unreal to include all necessary Colosseum content in packaged builds of your project.
 
-1. Close Visual Studio and the  `Unreal Editor` and right click the LandscapeMountains.uproject in Windows Explorer and select `Generate Visual Studio Project Files`.  This step detects all plugins and source files in your Unreal project and generates `.sln` file for Visual Studio.
+8. Close Visual Studio and the  `Unreal Editor` and right click the YourCustomProject.uproject in Windows Explorer and select `Generate Visual Studio Project Files`.  This step detects all plugins and source files in your Unreal project and generates `.sln` file for Visual Studio.
 
     ![regen](images/regen_sln.png)
 
     !!!tip
 
-        If the `Generate Visual Studio Project Files` option is missing you may need to reboot your machine for the Unreal Shell extensions to take effect.  If it is still missing then open the LandscapeMountains.uproject in the Unreal Editor and select `Refresh Visual Studio Project` from the `File` menu.
+        If the `Generate Visual Studio Project Files` option is missing you may need to reboot your machine for the Unreal Shell extensions to take effect.  If it is still missing then open the YourCustomProject.uproject in the Unreal Editor and select `Refresh Visual Studio Project` from the `File` menu.
 
-1. Reopen `LandscapeMountains.sln` in Visual Studio, and make sure "DebugGame Editor" and "Win64" build configuration is the active build configuration.
+9. Reopen `YourCustomProject.sln` in Visual Studio, and make sure "DebugGame Editor" and "Win64" build configuration is the active build configuration.
 
     ![build config](images/vsbuild_config.png)
 
-1. Press `F5` to `run`. This will start the Unreal Editor. The Unreal Editor allows you to edit the environment, assets and other game related settings. First thing you want to do in your environment is set up `PlayerStart` object. In Landscape Mountains environment, `PlayerStart` object already exist and you can find it in the `World Outliner`. Make sure its location is setup as shown. This is where Colosseum plugin will create and place the vehicle. If its too high up then vehicle will fall down as soon as you press play giving potentially random behavior
+10. Press `F5` to `run`. This will start the Unreal Editor. The Unreal Editor allows you to edit the environment, assets and other game related settings. First thing you want to do in your environment is set up `PlayerStart` object. In Landscape Mountains environment, `PlayerStart` object already exist and you can find it in the `World Outliner`. Make sure its location is setup as shown. This is where Colosseum plugin will create and place the vehicle. If its too high up then vehicle will fall down as soon as you press play giving potentially random behavior
 
     ![lm_player_start_pos.png](images/lm_player_start_pos.png)
 
-1. In `Window/World Settings` as shown below, set the `GameMode Override` to `ColosseumGameMode`:
+11. In `Window/World Settings` as shown below, set the `GameMode Override` to `ColosseumGameMode`:
 
     ![sim_game_mode.png](images/sim_game_mode.png)
 
-1. Go to 'Edit->Editor Preferences' in Unreal Editor, in the 'Search' box type 'CPU' and ensure that the 'Use Less CPU when in Background' is unchecked. If you don't do this then UE will be slowed down dramatically when UE window loses focus.
+12. Go to 'Edit->Editor Preferences' in Unreal Editor, in the 'Search' box type 'CPU' and ensure that the 'Use Less CPU when in Background' is unchecked. If you don't do this then UE will be slowed down dramatically when UE window loses focus.
 
-1. Be sure to `Save` these edits. Hit the Play button in the Unreal Editor. See [how to use Colosseum](https://github.com/CodexLabsLLC/Colosseum/#how-to-use-it).
+13. Be sure to `Save` these edits. Hit the Play button in the Unreal Editor. See [how to use Colosseum](https://github.com/CodexLabsLLC/Colosseum/#how-to-use-it).
 
 Congratulations! You are now running Colosseum in your own Unreal environment.
 
@@ -125,10 +122,10 @@ In this case, create a new blank C++ project with no Starter Content and add you
 
 #### I already have my own Unreal project. How do I use Colosseum with it?
 Copy the `Unreal\Plugins` folder from the build you did in the above section into the root of your Unreal project's folder. In your Unreal project's .uproject file, add the key `AdditionalDependencies` to the "Modules" object
-as we showed in the `LandscapeMountains.uproject` above.
+as we showed in the `YourCustomProject.uproject` above.
 ```json
 "AdditionalDependencies": [
-    "Colosseum"
+    "AirSim"
 ]
 ```
 
@@ -136,7 +133,7 @@ and the `Plugins` section to the top level object:
 ```json
 "Plugins": [
     {
-        "Name": "Colosseum",
+        "Name": "AirSim",
         "Enabled": true
     }
 ]

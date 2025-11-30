@@ -1,3 +1,3 @@
 # Changelog
 
-This page has moved [here](https://github.com/microsoft/AirSim/blob/main/docs/CHANGELOG.md).
+This page has moved [here](https://codexlabsllc.github.io/Colosseum/CHANGELOG/).

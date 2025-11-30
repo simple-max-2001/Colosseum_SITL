@@ -252,6 +252,8 @@ void APIPCamera::EndPlay(const EEndPlayReason::Type EndPlayReason)
         render_targets_[image_type] = nullptr;
         detections_[image_type] = nullptr;
     }
+
+    Super::EndPlay(EndPlayReason);
 }
 
 unsigned int APIPCamera::imageTypeCount()

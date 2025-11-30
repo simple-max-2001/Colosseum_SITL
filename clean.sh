@@ -7,8 +7,7 @@ pushd "$SCRIPT_DIR" >/dev/null
 set -e
 set +x
 
-rm -rf build_debug
-rm -rf build_release
+rm -rf build
 rm -rf cmake/output
 
 popd >/dev/null

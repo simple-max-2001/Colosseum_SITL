@@ -14,7 +14,7 @@ Click on the `Install` button on the top right, which should show the option to 
 
 ## Build Colosseum
 * Install Visual Studio 2022.
-**Make sure** to select **Desktop Development with C++** and **Windows 10 SDK 10.0.19041** (should be selected by default) and select the latest .NET Framework SDK under the 'Individual Components' tab while installing VS 2022.
+**Make sure** to select **Desktop Development with C++** and **Windows 10 SDK 10.0.XXXXX** or **Windows 11 SDK 11.0.XXXXX** (should be the Newest one!) and select the latest .NET Framework SDK under the 'Individual Components' tab while installing VS 2022.
 * Start `Developer Command Prompt for VS 2022`.
 * Clone the repo: `git clone https://github.com/CodexLabsLLC/Colosseum.git`, and go the Colosseum directory by `cd Colosseum`.
 

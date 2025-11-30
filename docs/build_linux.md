@@ -1,6 +1,6 @@
 # Build Colosseum on Linux
 
-The current recommended and tested environment is **Ubuntu 20.04 LTS**. Theoretically, you can build on other distros as well, but we haven't tested it.
+The current recommended and tested environment is **Ubuntu 24.04 LTS**. Theoretically, you can build on other distros as well, but we haven't tested it.
 
 We've two options - you can either build inside docker containers or your host machine.
 
@@ -16,11 +16,11 @@ Please see instructions [here](docker_ubuntu.md)
 
 - Make sure you are [registered with Epic Games](https://docs.unrealengine.com/en-US/SharingAndReleasing/Linux/BeginnerLinuxDeveloper/SettingUpAnUnrealWorkflow/index.html). This is required to get source code access for Unreal Engine.
 
-- Clone Unreal in your favorite folder and build it (this may take a while!). **Note**: We only support Unreal >= 5.0 at present. We recommend using 5.3.
+- Clone Unreal in your favorite folder and build it (this may take a while!). **Note**: We only support Unreal >= 5.0 at present. We recommend using 5.4 or 5.5.
 
 ```bash
 # go to the folder where you clone GitHub projects
-git clone -b 5.3 git@github.com:EpicGames/UnrealEngine.git
+git clone -b 5.4 git@github.com:EpicGames/UnrealEngine.git
 cd UnrealEngine
 ./Setup.sh
 ./GenerateProjectFiles.sh
@@ -37,7 +37,7 @@ git clone https://github.com/CodexLabsLLC/Colosseum.git
 cd Colosseum
 ```
 
-By default Colosseum uses clang 12 to build for compatibility with UE 5.3. The setup script will install the right version of cmake, llvm, and eigen.
+By default Colosseum uses clang 18 to build for compatibility with UE 5.4+. The setup script will install the right version of cmake, llvm, and eigen.
 
 ```bash
 ./setup.sh

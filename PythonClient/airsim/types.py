@@ -342,11 +342,11 @@ class CollisionInfo(MsgpackMixin):
 
     attribute_order = [
         ('has_collided', bool),
+        ('penetration_depth', float),
+        ('time_stamp', np.uint64),
         ('normal', Vector3r),
         ('impact_point', Vector3r),
         ('position', Vector3r),
-        ('penetration_depth', float),
-        ('time_stamp', np.uint64),
         ('object_name', str),
         ('object_id', int)
     ]
@@ -381,8 +381,9 @@ class YawMode(MsgpackMixin):
 class RCData(MsgpackMixin):
     timestamp = 0
     pitch, roll, throttle, yaw = (0.0,) * 4  # init 4 variable to 0.0
-    switch1, switch2, switch3, switch4 = (0,) * 4
-    switch5, switch6, switch7, switch8 = (0,) * 4
+    left_z, right_z = (0.0,) * 2
+    switches = 0
+    vendor_id = ''
     is_initialized = False
     is_valid = False
 
@@ -392,34 +393,26 @@ class RCData(MsgpackMixin):
         ('roll', float),
         ('throttle', float),
         ('yaw', float),
-        ('switch1', int),
-        ('switch2', int),
-        ('switch3', int),
-        ('switch4', int),
-        ('switch5', int),
-        ('switch6', int),
-        ('switch7', int),
-        ('switch8', int),
+        ('left_z', float),
+        ('right_z', float),
+        ('switches', int),
+        ('vendor_id',str),
         ('is_initialized', bool),
         ('is_valid', bool)
     ]
 
-    def __init__(self, timestamp=0, pitch=0.0, roll=0.0, throttle=0.0, yaw=0.0, switch1=0,
-                 switch2=0, switch3=0, switch4=0, switch5=0, switch6=0, switch7=0, switch8=0, is_initialized=False,
+    def __init__(self, timestamp=0, pitch=0.0, roll=0.0, throttle=0.0, yaw=0.0, left_z=0.0, right_z=0.0, switches=0,
+                 vendor_id='', is_initialized=False,
                  is_valid=False):
         self.timestamp = timestamp
         self.pitch = pitch
         self.roll = roll
         self.throttle = throttle
         self.yaw = yaw
-        self.switch1 = switch1
-        self.switch2 = switch2
-        self.switch3 = switch3
-        self.switch4 = switch4
-        self.switch5 = switch5
-        self.switch6 = switch6
-        self.switch7 = switch7
-        self.switch8 = switch8
+        self.left_z = left_z
+        self.right_z = right_z
+        self.switches = switches
+        self.vendor_id = vendor_id
         self.is_initialized = is_initialized
         self.is_valid = is_valid
 
